@@ -1,0 +1,362 @@
+
+tom@tom-x9drgqf:~$ sudo docker run -it --ipc=host --gpus all -v ~/git/vespai/models/yolov5-params:/vespai-params ultralytics/yolov5
+
+...
+...
+
+
+
+root@f7b3282aa628:/usr/src/app# python export --weights /vespai-params/yolov5s-all-data.pt --include edgetpu
+python: can't open file '/usr/src/app/export': [Errno 2] No such file or directory
+root@f7b3282aa628:/usr/src/app# python export.py --weights /vespai-params/yolov5s-all-data.pt --include edgetpu
+export: data=data/coco128.yaml, weights=['/vespai-params/yolov5s-all-data.pt'], imgsz=[640, 640], batch_size=1, device=cpu, half=False, inplace=False, keras=False, optimize=False, int8=False, per_tensor=False, dynamic=False, simplify=False, mlmodel=False, opset=17, verbose=False, workspace=4, nms=False, agnostic_nms=False, topk_per_class=100, topk_all=100, iou_thres=0.45, conf_thres=0.25, include=['edgetpu']
+YOLOv5 🚀 2024-9-16 Python-3.10.9 torch-2.0.0 CPU
+
+Fusing layers... 
+[W NNPACK.cpp:64] Could not initialize NNPACK! Reason: Unsupported hardware.
+YOLOv5s summary: 213 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
+
+PyTorch: starting from /vespai-params/yolov5s-all-data.pt with output shape (1, 25200, 7) (13.7 MB)
+requirements: Ultralytics requirement ['tensorflow-cpu<=2.15.1'] not found, attempting AutoUpdate...
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Collecting tensorflow-cpu<=2.15.1
+  Downloading tensorflow_cpu-2.15.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting absl-py>=1.0.0 (from tensorflow-cpu<=2.15.1)
+  Downloading absl_py-2.1.0-py3-none-any.whl.metadata (2.3 kB)
+Requirement already satisfied: astunparse>=1.6.0 in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (1.6.3)
+Requirement already satisfied: flatbuffers>=23.5.26 in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (24.3.25)
+Collecting gast!=0.5.0,!=0.5.1,!=0.5.2,>=0.2.1 (from tensorflow-cpu<=2.15.1)
+  Downloading gast-0.6.0-py3-none-any.whl.metadata (1.3 kB)
+Collecting google-pasta>=0.1.1 (from tensorflow-cpu<=2.15.1)
+  Downloading google_pasta-0.2.0-py3-none-any.whl.metadata (814 bytes)
+Collecting h5py>=2.9.0 (from tensorflow-cpu<=2.15.1)
+  Downloading h5py-3.11.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.5 kB)
+Collecting libclang>=13.0.0 (from tensorflow-cpu<=2.15.1)
+  Downloading libclang-18.1.1-py2.py3-none-manylinux2010_x86_64.whl.metadata (5.2 kB)
+Collecting ml-dtypes~=0.3.1 (from tensorflow-cpu<=2.15.1)
+  Downloading ml_dtypes-0.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+Requirement already satisfied: numpy<2.0.0,>=1.23.5 in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (1.26.4)
+Collecting opt-einsum>=2.3.2 (from tensorflow-cpu<=2.15.1)
+  Downloading opt_einsum-3.3.0-py3-none-any.whl.metadata (6.5 kB)
+Requirement already satisfied: packaging in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (24.1)
+Requirement already satisfied: protobuf!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev,>=3.20.3 in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (3.20.3)
+Requirement already satisfied: setuptools in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (75.1.0)
+Requirement already satisfied: six>=1.12.0 in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (1.16.0)
+Collecting termcolor>=1.1.0 (from tensorflow-cpu<=2.15.1)
+  Downloading termcolor-2.4.0-py3-none-any.whl.metadata (6.1 kB)
+Requirement already satisfied: typing-extensions>=3.6.6 in /opt/conda/lib/python3.10/site-packages (from tensorflow-cpu<=2.15.1) (4.12.2)
+Collecting wrapt<1.15,>=1.11.0 (from tensorflow-cpu<=2.15.1)
+  Downloading wrapt-1.14.1-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting tensorflow-io-gcs-filesystem>=0.23.1 (from tensorflow-cpu<=2.15.1)
+  Downloading tensorflow_io_gcs_filesystem-0.37.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (14 kB)
+Collecting grpcio<2.0,>=1.24.3 (from tensorflow-cpu<=2.15.1)
+  Downloading grpcio-1.66.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.9 kB)
+Collecting tensorboard<2.16,>=2.15 (from tensorflow-cpu<=2.15.1)
+  Downloading tensorboard-2.15.2-py3-none-any.whl.metadata (1.7 kB)
+Collecting tensorflow-estimator<2.16,>=2.15.0 (from tensorflow-cpu<=2.15.1)
+  Downloading tensorflow_estimator-2.15.0-py2.py3-none-any.whl.metadata (1.3 kB)
+Collecting keras<2.16,>=2.15.0 (from tensorflow-cpu<=2.15.1)
+  Downloading keras-2.15.0-py3-none-any.whl.metadata (2.4 kB)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in /opt/conda/lib/python3.10/site-packages (from astunparse>=1.6.0->tensorflow-cpu<=2.15.1) (0.44.0)
+Requirement already satisfied: google-auth<3,>=1.6.3 in /opt/conda/lib/python3.10/site-packages (from tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (2.17.0)
+Collecting google-auth-oauthlib<2,>=0.5 (from tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1)
+  Downloading google_auth_oauthlib-1.2.1-py2.py3-none-any.whl.metadata (2.7 kB)
+Collecting markdown>=2.6.8 (from tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1)
+  Downloading Markdown-3.7-py3-none-any.whl.metadata (7.0 kB)
+Requirement already satisfied: requests<3,>=2.21.0 in /opt/conda/lib/python3.10/site-packages (from tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (2.32.3)
+Collecting tensorboard-data-server<0.8.0,>=0.7.0 (from tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1)
+  Downloading tensorboard_data_server-0.7.2-py3-none-any.whl.metadata (1.1 kB)
+Collecting werkzeug>=1.0.1 (from tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1)
+  Downloading werkzeug-3.0.4-py3-none-any.whl.metadata (3.7 kB)
+Requirement already satisfied: cachetools<6.0,>=2.0.0 in /opt/conda/lib/python3.10/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (5.5.0)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in /opt/conda/lib/python3.10/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (0.4.1)
+Requirement already satisfied: rsa<5,>=3.1.4 in /opt/conda/lib/python3.10/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (4.7.2)
+Collecting requests-oauthlib>=0.7.0 (from google-auth-oauthlib<2,>=0.5->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1)
+  Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl.metadata (11 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in /opt/conda/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (2.0.4)
+Requirement already satisfied: idna<4,>=2.5 in /opt/conda/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (3.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /opt/conda/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (1.26.14)
+Requirement already satisfied: certifi>=2017.4.17 in /opt/conda/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (2022.12.7)
+Requirement already satisfied: MarkupSafe>=2.1.1 in /opt/conda/lib/python3.10/site-packages (from werkzeug>=1.0.1->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (2.1.1)
+Requirement already satisfied: pyasn1<0.7.0,>=0.4.6 in /opt/conda/lib/python3.10/site-packages (from pyasn1-modules>=0.2.1->google-auth<3,>=1.6.3->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1) (0.6.1)
+Collecting oauthlib>=3.0.0 (from requests-oauthlib>=0.7.0->google-auth-oauthlib<2,>=0.5->tensorboard<2.16,>=2.15->tensorflow-cpu<=2.15.1)
+  Downloading oauthlib-3.2.2-py3-none-any.whl.metadata (7.5 kB)
+Downloading tensorflow_cpu-2.15.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (207.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.2/207.2 MB 113.2 MB/s eta 0:00:00
+Downloading absl_py-2.1.0-py3-none-any.whl (133 kB)
+Downloading gast-0.6.0-py3-none-any.whl (21 kB)
+Downloading google_pasta-0.2.0-py3-none-any.whl (57 kB)
+Downloading grpcio-1.66.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.7/5.7 MB 118.6 MB/s eta 0:00:00
+Downloading h5py-3.11.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 116.8 MB/s eta 0:00:00
+Downloading keras-2.15.0-py3-none-any.whl (1.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 127.3 MB/s eta 0:00:00
+Downloading libclang-18.1.1-py2.py3-none-manylinux2010_x86_64.whl (24.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.5/24.5 MB 104.2 MB/s eta 0:00:00
+Downloading ml_dtypes-0.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 129.5 MB/s eta 0:00:00
+Downloading opt_einsum-3.3.0-py3-none-any.whl (65 kB)
+Downloading tensorboard-2.15.2-py3-none-any.whl (5.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.5/5.5 MB 73.0 MB/s eta 0:00:00
+Downloading tensorflow_estimator-2.15.0-py2.py3-none-any.whl (441 kB)
+Downloading tensorflow_io_gcs_filesystem-0.37.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.1/5.1 MB 106.9 MB/s eta 0:00:00
+Downloading termcolor-2.4.0-py3-none-any.whl (7.7 kB)
+Downloading wrapt-1.14.1-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (77 kB)
+Downloading google_auth_oauthlib-1.2.1-py2.py3-none-any.whl (24 kB)
+Downloading Markdown-3.7-py3-none-any.whl (106 kB)
+Downloading tensorboard_data_server-0.7.2-py3-none-any.whl (2.4 kB)
+Downloading werkzeug-3.0.4-py3-none-any.whl (227 kB)
+Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl (24 kB)
+Downloading oauthlib-3.2.2-py3-none-any.whl (151 kB)
+Installing collected packages: libclang, wrapt, werkzeug, termcolor, tensorflow-io-gcs-filesystem, tensorflow-estimator, tensorboard-data-server, opt-einsum, oauthlib, ml-dtypes, markdown, keras, h5py, grpcio, google-pasta, gast, absl-py, requests-oauthlib, google-auth-oauthlib, tensorboard, tensorflow-cpu
+Successfully installed absl-py-2.1.0 gast-0.6.0 google-auth-oauthlib-1.2.1 google-pasta-0.2.0 grpcio-1.66.1 h5py-3.11.0 keras-2.15.0 libclang-18.1.1 markdown-3.7 ml-dtypes-0.3.2 oauthlib-3.2.2 opt-einsum-3.3.0 requests-oauthlib-2.0.0 tensorboard-2.15.2 tensorboard-data-server-0.7.2 tensorflow-cpu-2.15.1 tensorflow-estimator-2.15.0 tensorflow-io-gcs-filesystem-0.37.1 termcolor-2.4.0 werkzeug-3.0.4 wrapt-1.14.1
+
+requirements: AutoUpdate success ✅ 32.0s, installed 1 package: ['tensorflow-cpu<=2.15.1']
+requirements: ⚠️ Restart runtime or rerun command for updates to take effect
+
+
+TensorFlow SavedModel: starting export with tensorflow 2.15.1...
+WARNING ⚠️ using Tensorflow 2.15.1 > 2.13.1 might cause issue when exporting the model to tflite https://github.com/ultralytics/yolov5/issues/12489
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1      3520  models.common.Conv                      [3, 32, 6, 2, 2]              
+  1                -1  1     18560  models.common.Conv                      [32, 64, 3, 2]                
+  2                -1  1     18816  models.common.C3                        [64, 64, 1]                   
+  3                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+  4                -1  1    115712  models.common.C3                        [128, 128, 2]                 
+  5                -1  1    295424  models.common.Conv                      [128, 256, 3, 2]              
+  6                -1  1    625152  models.common.C3                        [256, 256, 3]                 
+  7                -1  1   1180672  models.common.Conv                      [256, 512, 3, 2]              
+  8                -1  1   1182720  models.common.C3                        [512, 512, 1]                 
+  9                -1  1    656896  models.common.SPPF                      [512, 512, 5]                 
+ 10                -1  1    131584  models.common.Conv                      [512, 256, 1, 1]              
+ 11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 12           [-1, 6]  1         0  models.common.Concat                    [1]                           
+ 13                -1  1    361984  models.common.C3                        [512, 256, 1, False]          
+ 14                -1  1     33024  models.common.Conv                      [256, 128, 1, 1]              
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 16           [-1, 4]  1         0  models.common.Concat                    [1]                           
+ 17                -1  1     90880  models.common.C3                        [256, 128, 1, False]          
+ 18                -1  1    147712  models.common.Conv                      [128, 128, 3, 2]              
+ 19          [-1, 14]  1         0  models.common.Concat                    [1]                           
+ 20                -1  1    296448  models.common.C3                        [256, 256, 1, False]          
+ 21                -1  1    590336  models.common.Conv                      [256, 256, 3, 2]              
+ 22          [-1, 10]  1         0  models.common.Concat                    [1]                           
+ 23                -1  1   1182720  models.common.C3                        [512, 512, 1, False]          
+ 24      [17, 20, 23]  1     18879  models.yolo.Detect                      [2, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [128, 256, 512], [640, 640]]
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(1, 640, 640, 3)]           0         []                            
+                                                                                                  
+ tf_conv (TFConv)            (1, 320, 320, 32)            3488      ['input_1[0][0]']             
+                                                                                                  
+ tf_conv_1 (TFConv)          (1, 160, 160, 64)            18496     ['tf_conv[0][0]']             
+                                                                                                  
+ tfc3 (TFC3)                 (1, 160, 160, 64)            18624     ['tf_conv_1[0][0]']           
+                                                                                                  
+ tf_conv_7 (TFConv)          (1, 80, 80, 128)             73856     ['tfc3[0][0]']                
+                                                                                                  
+ tfc3_1 (TFC3)               (1, 80, 80, 128)             115200    ['tf_conv_7[0][0]']           
+                                                                                                  
+ tf_conv_15 (TFConv)         (1, 40, 40, 256)             295168    ['tfc3_1[0][0]']              
+                                                                                                  
+ tfc3_2 (TFC3)               (1, 40, 40, 256)             623872    ['tf_conv_15[0][0]']          
+                                                                                                  
+ tf_conv_25 (TFConv)         (1, 20, 20, 512)             1180160   ['tfc3_2[0][0]']              
+                                                                                                  
+ tfc3_3 (TFC3)               (1, 20, 20, 512)             1181184   ['tf_conv_25[0][0]']          
+                                                                                                  
+ tfsppf (TFSPPF)             (1, 20, 20, 512)             656128    ['tfc3_3[0][0]']              
+                                                                                                  
+ tf_conv_33 (TFConv)         (1, 20, 20, 256)             131328    ['tfsppf[0][0]']              
+                                                                                                  
+ tf_upsample (TFUpsample)    (1, 40, 40, 256)             0         ['tf_conv_33[0][0]']          
+                                                                                                  
+ tf_concat (TFConcat)        (1, 40, 40, 512)             0         ['tf_upsample[0][0]',         
+                                                                     'tfc3_2[0][0]']              
+                                                                                                  
+ tfc3_4 (TFC3)               (1, 40, 40, 256)             361216    ['tf_concat[0][0]']           
+                                                                                                  
+ tf_conv_39 (TFConv)         (1, 40, 40, 128)             32896     ['tfc3_4[0][0]']              
+                                                                                                  
+ tf_upsample_1 (TFUpsample)  (1, 80, 80, 128)             0         ['tf_conv_39[0][0]']          
+                                                                                                  
+ tf_concat_1 (TFConcat)      (1, 80, 80, 256)             0         ['tf_upsample_1[0][0]',       
+                                                                     'tfc3_1[0][0]']              
+                                                                                                  
+ tfc3_5 (TFC3)               (1, 80, 80, 128)             90496     ['tf_concat_1[0][0]']         
+                                                                                                  
+ tf_conv_45 (TFConv)         (1, 40, 40, 128)             147584    ['tfc3_5[0][0]']              
+                                                                                                  
+ tf_concat_2 (TFConcat)      (1, 40, 40, 256)             0         ['tf_conv_45[0][0]',          
+                                                                     'tf_conv_39[0][0]']          
+                                                                                                  
+ tfc3_6 (TFC3)               (1, 40, 40, 256)             295680    ['tf_concat_2[0][0]']         
+                                                                                                  
+ tf_conv_51 (TFConv)         (1, 20, 20, 256)             590080    ['tfc3_6[0][0]']              
+                                                                                                  
+ tf_concat_3 (TFConcat)      (1, 20, 20, 512)             0         ['tf_conv_51[0][0]',          
+                                                                     'tf_conv_33[0][0]']          
+                                                                                                  
+ tfc3_7 (TFC3)               (1, 20, 20, 512)             1181184   ['tf_concat_3[0][0]']         
+                                                                                                  
+ tf_detect (TFDetect)        ((1, 25200, 7),              18879     ['tfc3_5[0][0]',              
+                             )                                       'tfc3_6[0][0]',              
+                                                                     'tfc3_7[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 7015519 (26.76 MB)
+Trainable params: 0 (0.00 Byte)
+Non-trainable params: 7015519 (26.76 MB)
+__________________________________________________________________________________________________
+TensorFlow SavedModel: export success ✅ 46.5s, saved as /vespai-params/yolov5s-all-data_saved_model (27.0 MB)
+
+TensorFlow Lite: starting export with tensorflow 2.15.1...
+
+Dataset not found ⚠️, missing paths ['/usr/src/datasets/coco128/images/train2017']
+Downloading https://github.com/ultralytics/assets/releases/download/v0.0.0/coco128.zip to coco128.zip...
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6.66M/6.66M [00:00<00:00, 92.8MB/s]
+Dataset download success ✅ (0.8s), saved to /usr/src/datasets
+Summary on the non-converted ops:
+---------------------------------
+ * Accepted dialects: tfl, builtin, func
+ * Non-Converted Ops: 146, Total Ops 404, % non-converted = 36.14 %
+ * 146 ARITH ops
+
+- arith.constant:  146 occurrences  (f32: 131, i32: 15)
+
+
+
+  (f32: 10)
+  (f32: 17)
+  (f32: 60)
+  (f32: 66)
+  (f32: 3)
+  (f32: 75)
+  (f32: 7)
+  (f32: 6)
+  (f32: 2)
+  (f32: 9)
+fully_quantize: 0, inference_type: 6, input_inference_type: UINT8, output_inference_type: UINT8
+TensorFlow Lite: export success ✅ 234.3s, saved as /vespai-params/yolov5s-all-data-int8.tflite (7.0 MB)
+
+Edge TPU: export requires Edge TPU compiler. Attempting install from https://coral.ai/docs/edgetpu/compiler/
+/bin/sh: 1: sudo: not found
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1021  100  1021    0     0  11872      0 --:--:-- --:--:-- --:--:-- 11872
+OK
+deb https://packages.cloud.google.com/apt coral-edgetpu-stable main
+Hit:1 http://archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu bionic-updates InRelease                                               
+Hit:3 http://archive.ubuntu.com/ubuntu bionic-backports InRelease                                             
+Hit:4 http://security.ubuntu.com/ubuntu bionic-security InRelease                                                                       
+Get:5 https://packages.cloud.google.com/apt coral-edgetpu-stable InRelease [1423 B]                                                     
+Get:6 https://packages.cloud.google.com/apt coral-edgetpu-stable/main amd64 Packages [6888 B]
+Get:7 https://packages.cloud.google.com/apt coral-edgetpu-stable/main all Packages [1865 B]
+Fetched 10.2 kB in 1s (9509 B/s)   
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following NEW packages will be installed:
+  edgetpu-compiler
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 7913 kB of archives.
+After this operation, 31.2 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt coral-edgetpu-stable/main amd64 edgetpu-compiler amd64 16.0 [7913 kB]
+Fetched 7913 kB in 1s (9527 kB/s)        
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package edgetpu-compiler.
+(Reading database ... 12975 files and directories currently installed.)
+Preparing to unpack .../edgetpu-compiler_16.0_amd64.deb ...
+Unpacking edgetpu-compiler (16.0) ...
+Setting up edgetpu-compiler (16.0) ...
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+
+Edge TPU: starting export with Edge TPU compiler 16.0.384591198...
+Edge TPU Compiler version 16.0.384591198
+Searching for valid delegate with step 10
+Try to compile segment with 261 ops
+Started a compilation timeout timer of 180 seconds.
+ERROR: Restored original execution plan after delegate application failure.
+Compilation failed: Compilation failed due to large activation tensors in model.
+Compilation child process completed within timeout period.
+Compilation failed! 
+Try to compile segment with 251 ops
+Intermediate tensors: model/tf_detect/Reshape_4,model/tf_detect/Sigmoid_81,model/tf_detect/truediv_5;model/tf_detect/Const,model/tf_detect/Reshape_1,model/tf_detect/Reshape_3
+Started a compilation timeout timer of 180 seconds.
+ERROR: Restored original execution plan after delegate application failure.
+Compilation failed: Compilation failed due to large activation tensors in model.
+Compilation child process completed within timeout period.
+Compilation failed! 
+Try to compile segment with 241 ops
+Intermediate tensors: model/tf_detect/Reshape_1,model/tf_detect/Reshape_3,model/tfc3_7/tf_conv_54/mul_1
+Started a compilation timeout timer of 180 seconds.
+ERROR: Restored original execution plan after delegate application failure.
+Compilation failed: Compilation failed due to large activation tensors in model.
+Compilation child process completed within timeout period.
+Compilation failed! 
+Try to compile segment with 231 ops
+Intermediate tensors: model/tfc3_7/tf_conv_53/mul_1,model/tfc3_7/tf_conv_52/mul_1,model/tf_detect/Reshape_3,model/tf_detect/Reshape_1
+Started a compilation timeout timer of 180 seconds.
+ERROR: Restored original execution plan after delegate application failure.
+Compilation failed: Compilation failed due to large activation tensors in model.
+Compilation child process completed within timeout period.
+Compilation failed! 
+Try to compile segment with 221 ops
+Intermediate tensors: model/tf_detect/Reshape_1,model/tf_conv_33/mul_1,model/tf_detect/Reshape_3,model/tf_conv_51/sequential_13/tf_pad_6/Pad
+Started a compilation timeout timer of 180 seconds.
+
+Model compiled successfully in 12725 ms.
+
+Input model: /vespai-params/yolov5s-all-data-int8.tflite
+Input size: 7.03MiB
+Output model: /vespai-params/yolov5s-all-data-int8_edgetpu.tflite
+Output size: 8.00MiB
+On-chip memory used for caching model parameters: 4.18MiB
+On-chip memory remaining for caching model parameters: 2.67MiB
+Off-chip memory used for streaming uncached model parameters: 0.00B
+Number of Edge TPU subgraphs: 1
+Total number of operations: 261
+Operation log: /vespai-params/yolov5s-all-data-int8_edgetpu.log
+
+Model successfully compiled but not all operations are supported by the Edge TPU. A percentage of the model will instead run on the CPU, which is slower. If possible, consider updating your model to use only operations supported by the Edge TPU. For details, visit g.co/coral/model-reqs.
+Number of operations that will run on Edge TPU: 123
+Number of operations that will run on CPU: 138
+
+Operator                       Count      Status
+
+CONCATENATION                  5          Mapped to Edge TPU
+CONCATENATION                  12         More than one subgraph is not supported
+PAD                            2          More than one subgraph is not supported
+PAD                            5          Mapped to Edge TPU
+STRIDED_SLICE                  9          More than one subgraph is not supported
+RESHAPE                        6          More than one subgraph is not supported
+RESIZE_NEAREST_NEIGHBOR        2          More than one subgraph is not supported
+CONV_2D                        26         More than one subgraph is not supported
+CONV_2D                        34         Mapped to Edge TPU
+QUANTIZE                       1          Operation is otherwise supported, but not mapped due to some unspecified limitation
+QUANTIZE                       4          More than one subgraph is not supported
+QUANTIZE                       1          Mapped to Edge TPU
+MUL                            41         More than one subgraph is not supported
+MUL                            34         Mapped to Edge TPU
+MAX_POOL_2D                    3          Mapped to Edge TPU
+ADD                            3          More than one subgraph is not supported
+ADD                            7          Mapped to Edge TPU
+LOGISTIC                       34         Mapped to Edge TPU
+LOGISTIC                       32         More than one subgraph is not supported
+Compilation child process completed within timeout period.
+Compilation succeeded! 
+Edge TPU: export success ✅ 203.1s, saved as /vespai-params/yolov5s-all-data-int8_edgetpu.tflite (8.0 MB)
+
+Export complete (486.3s)
+Results saved to /vespai-params
+Detect:          python detect.py --weights /vespai-params/yolov5s-all-data-int8_edgetpu.tflite 
+Validate:        python val.py --weights /vespai-params/yolov5s-all-data-int8_edgetpu.tflite 
+PyTorch Hub:     model = torch.hub.load('ultralytics/yolov5', 'custom', '/vespai-params/yolov5s-all-data-int8_edgetpu.tflite')  
+Visualize:       https://netron.app
